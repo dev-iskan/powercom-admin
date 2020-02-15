@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    v-navigation-drawer(v-model="drawer" fixed clipped app width="300")
+    v-navigation-drawer(v-model="drawer" fixed clipped app)
       v-list.py-0(dense)
         template(v-for="(item, index) in items")
           div
@@ -43,52 +43,36 @@ export default {
         to: { name: 'main' },
       },
       {
-        icon: 'mdi-newspaper',
-        text: 'news',
+        icon: 'mdi-shopping',
+        text: 'orders',
       },
       {
-        icon: 'mdi-book-open',
-        text: 'news_categories',
+        icon: 'mdi-card-bulleted',
+        text: 'products',
+      },
+      {
+        icon: 'mdi-newspaper',
+        text: 'news',
       },
       {
         icon: 'mdi-contacts',
         text: 'users',
       },
       {
-        icon: 'mdi-account-card-details',
-        text: 'roles',
+        icon: 'mdi-notebook',
+        text: 'categories',
       },
       {
-        icon: 'mdi-shopping',
-        text: 'trading_space',
-      },
-      {
-        icon: 'mdi-folder-table',
-        text: 'trading_categories',
+        icon: 'mdi-star-box',
+        text: 'brands',
       },
       {
         icon: 'mdi-headset',
-        text: 'consultants',
+        text: 'operators',
       },
       {
-        icon: 'mdi-headphones-settings',
-        text: 'consultants_categories',
-      },
-      {
-        icon: 'mdi-library-video',
-        text: 'videos',
-      },
-      {
-        icon: 'mdi-file-settings',
-        text: 'assets',
-      },
-      {
-        icon: 'mdi-card-bulleted',
-        text: 'ads',
-      },
-      {
-        icon: 'mdi-map',
-        text: 'regions',
+        icon: 'mdi-home-currency-usd',
+        text: 'prices',
       },
       {
         icon: 'mdi-settings',

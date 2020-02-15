@@ -20,15 +20,6 @@ export default {
   name: 'Statistics',
   computed: {
     // ...mapState('category', { categories: 'pagination' }),
-    // ...mapState('brand', { brands: 'pagination' }),
-    // ...mapState('manufacturer', { manufacturers: 'pagination' }),
-    // ...mapState('purpose', { purposes: 'pagination' }),
-    // ...mapState('tag', { tags: 'pagination' }),
-    // ...mapState('article', { articles: 'pagination' }),
-    // ...mapState('product', { products: 'pagination' }),
-    // ...mapState('status', { statuses: 'pagination' }),
-    // ...mapState('user', { users: 'pagination' }),
-    // ...mapState('order', { orders: 'pagination' }),
 
     cards() {
       return [
@@ -36,94 +27,54 @@ export default {
           subheader: this.$t('basics'),
         },
         {
+          icon: 'mdi-shopping',
+          text: this.$t('orders'),
+          count: 0,
+          // to: { name: 'orders' },
+        },
+        {
+          icon: 'mdi-card-bulleted',
+          text: this.$t('products'),
+          count: 0,
+        },
+        {
           icon: 'mdi-newspaper',
           text: this.$t('news'),
           count: 0,
-          // to: { name: 'categories' },
         },
         {
           icon: 'mdi-contacts',
           text: this.$t('users'),
           count: 0,
-          // to: { name: 'products' },
         },
         {
-          icon: 'mdi-shopping',
-          text: this.$t('trading_space'),
+          subheader: this.$t('additional'),
+        },
+        {
+          icon: 'mdi-home-currency-usd',
+          text: this.$t('prices'),
           count: 0,
-          // to: { name: 'orders' },
+        },
+        {
+          icon: 'mdi-notebook',
+          text: this.$t('categories'),
+          count: 0,
+        },
+        {
+          icon: 'mdi-star-box',
+          text: this.$t('brands'),
+          count: 0,
         },
         {
           icon: 'mdi-headset',
-          text: this.$t('consultants'),
+          text: this.$t('operators'),
           count: 0,
-          // to: { name: 'users' },
-        },
-        {
-          icon: 'mdi-library-video',
-          text: this.$t('videos'),
-          count: 0,
-          // to: { name: 'users' },
-        },
-        {
-          icon: 'mdi-file-settings',
-          text: this.$t('assets'),
-          count: 0,
-          // to: { name: 'users' },
-        },
-        {
-          icon: 'mdi-card-bulleted',
-          text: this.$t('ads'),
-          count: 0,
-          // to: { name: 'users' },
-        },
-        {
-          icon: 'mdi-map',
-          text: this.$t('regions'),
-          count: 0,
-          // to: { name: 'users' },
-        },
-        {
-          subheader: this.$t('attributes'),
-        },
-        {
-          icon: 'mdi-book-open',
-          text: this.$t('news_categories'),
-          count: 0,
-          // to: { name: 'statuses' },
-        },
-        {
-          icon: 'mdi-account-card-details',
-          text: this.$t('roles'),
-          count: 0,
-          // to: { name: 'brands' },
-        },
-        {
-          icon: 'mdi-folder-table',
-          text: this.$t('trading_categories'),
-          count: 0,
-          // to: { name: 'manufacturers' },
-        },
-        {
-          icon: 'mdi-headphones-settings',
-          text: this.$t('consultants_categories'),
-          count: 0,
-          // to: { name: 'purposes' },
         },
       ];
     },
   },
   created() {
     // this.$store.dispatch('brand/list', { paginate: true });
-    // this.$store.dispatch('category/list', { paginate: true });
-    // this.$store.dispatch('manufacturer/list', { paginate: true });
-    // this.$store.dispatch('purpose/list', { paginate: true });
-    // this.$store.dispatch('tag/list', { paginate: true });
-    // this.$store.dispatch('article/list', { paginate: true });
-    // this.$store.dispatch('product/list', { paginate: true });
-    // this.$store.dispatch('status/list', { paginate: true });
-    // this.$store.dispatch('user/list', { paginate: true });
-    // this.$store.dispatch('order/list', { paginate: true });
   },
 };
 </script>
