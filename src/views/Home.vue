@@ -82,7 +82,7 @@ export default {
         divider: true,
         icon: 'mdi-logout-variant',
         text: 'logout',
-        to: { name: 'login' },
+        to: { name: 'logout' },
       },
     ],
   }),

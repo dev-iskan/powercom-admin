@@ -15,6 +15,7 @@ const routes = [
     path: '/',
     name: 'home',
     redirect: { name: 'main' },
+    meta: { requiresAuth: true },
     component: () => import('@/views/Home'),
     children: [
       ...Main,
@@ -24,19 +25,18 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  // base: process.env.BASE_URL,
   routes,
 });
 
 router.beforeEach((to, _, next) => {
   store.commit('global/setLoading', true);
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    // store.dispatch('auth/authenticate')
-    //   .then(() => next())
-    //   .catch(() => next({ name: 'login' }));
+    store.dispatch('auth/detail')
+      .then(() => next())
+      .catch(() => next({ name: 'login' }));
   } else if (to.name === 'logout') {
-    // store.dispatch('auth/logout')
-    //   .finally(() => next({ name: 'login' }));
+    store.dispatch('auth/logout')
+      .finally(() => next({ name: 'login' }));
   } else {
     next();
   }

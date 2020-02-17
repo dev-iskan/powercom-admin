@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const TOKEN = 'jwt-token';
+export const TOKEN = 'jwt-token';
 
 const instance = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL,
