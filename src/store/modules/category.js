@@ -7,7 +7,35 @@ const state = {
 };
 
 const getters = {
+  hierarchy(state) {
+    const items = [];
 
+    const getChildren = (parentId) => {
+      const children = [];
+      state.items.forEach((child) => {
+        if (child.parent_id === parentId) {
+          children.push({
+            id: child.id,
+            name: child.name,
+            children: getChildren(child.id),
+          });
+        }
+      });
+      return children;
+    };
+
+    state.items.forEach((item) => {
+      if (!item.parent_id) {
+        items.push({
+          id: item.id,
+          name: item.name,
+          children: getChildren(item.id),
+        });
+      }
+    });
+
+    return items;
+  },
 };
 
 const actions = {

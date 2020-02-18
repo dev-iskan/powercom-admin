@@ -11,7 +11,11 @@
         :label="$t('name')"
       )
       v-select(
-        :items="[]"
+        v-model="payload.parent_id"
+        :items="items"
+        item-text="name"
+        item-value="id"
+        clearable
         :label="$t('parent_category')"
       )
       v-textarea(
@@ -44,40 +48,39 @@ export default {
     payload: {
       id: null,
       name: '',
+      parent_id: null,
       short_description: '',
     },
   }),
   computed: {
-    ...mapState('category', ['loading']),
+    ...mapState('category', ['loading', 'items']),
   },
   methods: {
-    ...mapActions('category', ['destroy', 'store', 'update']),
+    ...mapActions('category', ['destroy', 'store', 'update', 'get']),
+    clear() {
+      this.$set(this, 'payload', {
+        id: null,
+        name: '',
+        short_description: '',
+        parent_id: null,
+      });
+    },
     remove() {
       this.$root.$emit('confirm', () => this.destroy(this.id));
     },
     submit() {
       const action = this.id ? this.update(this.payload) : this.store(this.payload);
-      action
-        .then(() => {
-          this.payload = {
-            id: null,
-            name: '',
-            short_description: '',
-          };
-        })
-        .catch(alert);
+      action.then(() => this.clear()).catch(alert);
     },
   },
   watch: {
     id(value) {
       if (!value) {
-        this.$set(this, 'payload', {
-          id: null,
-          name: '',
-          short_description: '',
-        });
+        this.clear();
       } else {
-        // TODO: load an element
+        this.get(value)
+          .then((payload) => this.$set(this, 'payload', payload))
+          .catch(alert);
       }
     },
   },

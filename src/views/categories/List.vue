@@ -8,20 +8,19 @@
           v-treeview(
             ref="tree"
             :items="items"
-            @update:active="select"
-            @update:open="select"
-            activatable
-            open-on-click
-            selection-type="independent"
+            hoverable
             expand-icon="mdi-chevron-down"
             on-icon="mdi-bookmark"
             off-icon="mdi-bookmark-outline"
           )
+            template(v-slot:append="{ item }")
+              v-btn(icon @click="select(item.id)")
+                v-icon(small) {{ item.id == id ? 'mdi-close' : 'mdi-pencil' }}
       v-flex(xs6)
         item(:id="id")
 </template>
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import Item from './Item.vue';
 
 export default {
@@ -33,16 +32,12 @@ export default {
     id: null,
   }),
   computed: {
-    ...mapState('category', ['items']),
+    ...mapGetters('category', { items: 'hierarchy' }),
   },
   methods: {
     ...mapActions('category', ['list']),
-    select(items) {
-      if (items.length) {
-        [this.id] = items;
-      } else {
-        this.id = null;
-      }
+    select(id) {
+      this.id = this.id === id ? null : id;
     },
   },
   watch: {
