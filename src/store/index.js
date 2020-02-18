@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import global from './modules/global';
 import auth from './modules/auth';
 import category from './modules/category';
+import brand from './modules/brand';
 
 Vue.use(Vuex);
 
@@ -11,5 +12,6 @@ export default new Vuex.Store({
     global,
     auth,
     category,
+    brand,
   },
 });

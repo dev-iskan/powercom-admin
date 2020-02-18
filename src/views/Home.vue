@@ -66,6 +66,7 @@ export default {
       {
         icon: 'mdi-star-box',
         text: 'brands',
+        to: { name: 'brands' },
       },
       {
         icon: 'mdi-headset',
@@ -92,13 +93,3 @@ export default {
   },
 };
 </script>
-<style>
-.border {
-  background-color: white !important;
-  border: 1px solid rgba(0, 0, 0, 0.12) !important
-}
-.border-bottom {
-  background-color: white !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important
-}
-</style>

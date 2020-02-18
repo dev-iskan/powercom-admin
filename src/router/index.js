@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Main from '@/views/main/router';
 import Categories from '@/views/categories/router';
+import Brands from '@/views/brands/router';
 import store from '@/store';
 
 Vue.use(VueRouter);
@@ -25,6 +26,7 @@ const routes = [
     children: [
       ...Main,
       ...Categories,
+      ...Brands,
     ],
   },
 ];
