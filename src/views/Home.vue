@@ -53,6 +53,7 @@ export default {
       {
         icon: 'mdi-newspaper',
         text: 'news',
+        to: { name: 'articles' },
       },
       {
         icon: 'mdi-contacts',
