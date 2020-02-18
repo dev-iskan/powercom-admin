@@ -61,6 +61,7 @@ export default {
       {
         icon: 'mdi-notebook',
         text: 'categories',
+        to: { name: 'categories' },
       },
       {
         icon: 'mdi-star-box',

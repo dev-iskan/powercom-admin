@@ -20,5 +20,19 @@
   "brands": "Бренды",
   "prices": "Цены",
   "settings": "Настройки",
+  "search": "Найти",
+  "all_categories": "Все категории",
+  
+  "name": "Наименование",
+  "delete": "Удалить",
+  "save": "Сохранить",
+  "warning": "Предупреждение",
+  "short_description": "Краткое описание",
+  "cancel": "Отменить",
+  "delete_message": "Вы действительно хотите удалить элемент?",
+  "category.create": "Создание категории",
+  "category.update": "Редактирование категории",
+  "parent_category": "Родительская категория",
+
   "password": "Пароль"
 }
