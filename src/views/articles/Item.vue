@@ -34,6 +34,7 @@
             :label="$t('short_description')"
           )
           editor(v-model="payload.description")
+          images(v-if="payload.id" resource="articles" :id="payload.id")
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
