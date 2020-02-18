@@ -33,7 +33,7 @@
                     v-icon(small) mdi-delete
         v-divider
         .text-xs-center
-          v-pagination
+          v-pagination(v-model="query.page" :length="pagination.length")
         v-divider
         v-layout(row)
           v-spacer
@@ -82,19 +82,31 @@ export default {
           width: 0,
         },
       ],
+      query: {
+        paginate: true,
+        page: 1,
+      },
     };
   },
   computed: {
-    ...mapState('brand', ['loading', 'items']),
+    ...mapState('brand', ['loading', 'items', 'pagination']),
   },
   methods: {
     ...mapActions('brand', ['list', 'destroy']),
     remove(id) {
-      this.$root.$emit('confirm', () => this.destroy(id).catch(alert));
+      this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }).catch(alert));
+    },
+  },
+  watch: {
+    query: {
+      deep: true,
+      handler(value) {
+        this.list(value);
+      },
     },
   },
   created() {
-    this.list();
+    this.list(this.query);
   },
 };
 </script>

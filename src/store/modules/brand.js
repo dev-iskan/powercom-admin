@@ -4,6 +4,12 @@ import api from '@/api/brand';
 const state = {
   loading: false,
   items: [],
+  pagination: {
+    total: 0,
+    offset: 0,
+    page: 0,
+    length: 0,
+  },
 };
 
 const getters = {
@@ -11,12 +17,18 @@ const getters = {
 };
 
 const actions = {
-  list({ commit }, options) {
+  list({ commit }, params) {
     return new Promise((resolve, reject) => {
       commit('setLoading', true);
-      api.list(options)
+      api.list(params)
         .then(({ data }) => {
-          commit('setItems', data);
+          commit('setItems', data.data);
+          commit('setPagination', {
+            total: data.total,
+            page: data.current_page,
+            offset: data.per_page,
+            length: data.last_page,
+          });
           resolve(data);
         })
         .catch(reject)
@@ -56,12 +68,12 @@ const actions = {
         .finally(() => commit('setLoading', false));
     });
   },
-  destroy({ commit, dispatch }, id) {
+  destroy({ commit, dispatch }, { id, params }) {
     return new Promise((resolve, reject) => {
       commit('setLoading', true);
       api.destroy(id)
         .then(({ data }) => {
-          dispatch('list');
+          dispatch('list', params);
           resolve(data);
         })
         .catch(reject)
@@ -76,6 +88,14 @@ const mutations = {
   },
   setItems(state, items) {
     state.items = items;
+  },
+  setPagination(state, {
+    total, offset, page, length,
+  }) {
+    state.pagination.total = total;
+    state.pagination.offset = offset;
+    state.pagination.page = page;
+    state.pagination.length = length;
   },
 };
 
