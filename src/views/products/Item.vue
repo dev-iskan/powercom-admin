@@ -29,7 +29,7 @@
         v-divider
         v-card-text
           v-layout(row)
-            v-flex.pa-3(xs12 sm6)
+            v-flex.pa-3(xs12)
               v-text-field(v-model="payload.name" :label="$t('firstname')")
               v-text-field(v-model="payload.price" :label="$t('price')")
               v-text-field(v-model="payload.quantity" :label="$t('quantity')")
@@ -49,10 +49,9 @@
                 multiple
               )
               v-textarea(v-model="payload.short_description" :label="$t('short_description')")
-            v-flex.pa-3(xs12 sm6)
               .subtitle {{ $t('description') }}
               editor(v-model="payload.description")
-            v-flex.pa-3(xs12)
+              files(v-if="payload.id" :id="payload.id")
               images(v-if="payload.id" resource="products" :id="payload.id")
 </template>
 <script>
