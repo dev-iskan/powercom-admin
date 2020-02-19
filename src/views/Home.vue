@@ -49,6 +49,7 @@ export default {
       {
         icon: 'mdi-card-bulleted',
         text: 'products',
+        to: { name: 'products' },
       },
       {
         icon: 'mdi-newspaper',

@@ -5,6 +5,7 @@ import Categories from '@/views/categories/router';
 import Brands from '@/views/brands/router';
 import Articles from '@/views/articles/router';
 import Users from '@/views/users/router';
+import Products from '@/views/products/router';
 import store from '@/store';
 
 Vue.use(VueRouter);
@@ -31,6 +32,7 @@ const routes = [
       ...Brands,
       ...Articles,
       ...Users,
+      ...Products,
     ],
   },
 ];

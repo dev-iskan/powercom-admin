@@ -34,6 +34,7 @@ export default {
         {
           icon: 'mdi-card-bulleted',
           text: this.$t('products'),
+          to: { name: 'products' },
           count: 0,
         },
         {
