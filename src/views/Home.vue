@@ -58,6 +58,7 @@ export default {
       {
         icon: 'mdi-contacts',
         text: 'users',
+        to: { name: 'users' },
       },
       {
         icon: 'mdi-notebook',

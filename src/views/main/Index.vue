@@ -30,7 +30,6 @@ export default {
           icon: 'mdi-shopping',
           text: this.$t('orders'),
           count: 0,
-          // to: { name: 'orders' },
         },
         {
           icon: 'mdi-card-bulleted',
@@ -40,11 +39,13 @@ export default {
         {
           icon: 'mdi-newspaper',
           text: this.$t('news'),
+          to: { name: 'articles' },
           count: 0,
         },
         {
           icon: 'mdi-contacts',
           text: this.$t('users'),
+          to: { name: 'users' },
           count: 0,
         },
         {
@@ -58,11 +59,13 @@ export default {
         {
           icon: 'mdi-notebook',
           text: this.$t('categories'),
+          to: { name: 'categories' },
           count: 0,
         },
         {
           icon: 'mdi-star-box',
           text: this.$t('brands'),
+          to: { name: 'brands' },
           count: 0,
         },
         {
