@@ -12,7 +12,7 @@ tinymce-editor(
   toolbar="undo redo | copy paste | styleselect | \
   bold underline italic | alignleft aligncenter alignright alignjustify |\
   bullist numlist outdent indent | link image media"
-  api-key="mg6pqu4koekwqmr7xutzybe6vl48x4mhkmsly121ydyv2xbq"
+  :api-key="key"
 )
 </template>
 
@@ -25,6 +25,9 @@ export default {
   components: {
     'tinymce-editor': TinymceEditor,
   },
+  data: () => ({
+    key: process.env.VUE_APP_TINYMCE_KEY,
+  }),
   props: {
     value: {
       type: String,
