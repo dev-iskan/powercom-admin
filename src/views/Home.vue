@@ -52,16 +52,6 @@ export default {
         to: { name: 'products' },
       },
       {
-        icon: 'mdi-newspaper',
-        text: 'news',
-        to: { name: 'articles' },
-      },
-      {
-        icon: 'mdi-contacts',
-        text: 'users',
-        to: { name: 'users' },
-      },
-      {
         icon: 'mdi-notebook',
         text: 'categories',
         to: { name: 'categories' },
@@ -72,12 +62,18 @@ export default {
         to: { name: 'brands' },
       },
       {
+        icon: 'mdi-newspaper',
+        text: 'news',
+        to: { name: 'articles' },
+      },
+      {
         icon: 'mdi-headset',
         text: 'operators',
       },
       {
-        icon: 'mdi-home-currency-usd',
-        text: 'prices',
+        icon: 'mdi-contacts',
+        text: 'users',
+        to: { name: 'users' },
       },
       {
         icon: 'mdi-settings',

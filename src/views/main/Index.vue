@@ -14,13 +14,9 @@
             v-icon(small) mdi-open-in-new
 </template>
 <script>
-// import { mapState } from 'vuex';
-
 export default {
   name: 'Statistics',
   computed: {
-    // ...mapState('category', { categories: 'pagination' }),
-
     cards() {
       return [
         {
@@ -53,11 +49,6 @@ export default {
           subheader: this.$t('additional'),
         },
         {
-          icon: 'mdi-home-currency-usd',
-          text: this.$t('prices'),
-          count: 0,
-        },
-        {
           icon: 'mdi-notebook',
           text: this.$t('categories'),
           to: { name: 'categories' },
@@ -76,9 +67,6 @@ export default {
         },
       ];
     },
-  },
-  created() {
-    // this.$store.dispatch('brand/list', { paginate: true });
   },
 };
 </script>
