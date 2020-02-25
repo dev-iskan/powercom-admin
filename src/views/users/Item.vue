@@ -26,12 +26,31 @@
           v-layout(row)
             v-flex(xs12 sm6)
               v-text-field(v-model="payload.name" :label="$t('firstname')")
-              v-text-field(v-model="payload.surname" :label="$t('surname')")
-              v-text-field(v-model="payload.patronymic" :label="$t('patronymic')")
-            v-flex(xs12 sm6)
               v-text-field(v-model="payload.phone" :label="$t('phone')")
               v-text-field(v-model="payload.email" :label="$t('email')")
               v-text-field(v-model="payload.password" :label="$t('password')")
+            v-flex(xs12 sm6)
+              div(v-if="payload.id")
+                .subtitle-1 {{ $t('role') }}
+                v-checkbox.ml-2.mt-2(
+                  :disabled="loading"
+                  :label="$t('admin')"
+                  v-model="!!payload.admin"
+                  @click.stop="change('admin')"
+                  hide-details
+                )
+                v-checkbox.ml-2.mt-2(
+                  :disabled="loading"
+                  :label="$t('operator')"
+                  v-model="!!payload.operator"
+                  @click.stop="change('operator')"
+                  hide-details
+                )
+                v-checkbox.ml-2.mt-2(
+                  :label="$t('client')"
+                  v-model="!!payload.client"
+                  disabled hide-details
+                )
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
@@ -42,18 +61,19 @@ export default {
     payload: {
       id: null,
       name: '',
-      surname: '',
-      patronymic: '',
       phone: '',
       email: '',
       password: '',
+      admin: {},
+      operator: {},
+      client: {},
     },
   }),
   computed: {
     ...mapState('user', ['loading']),
   },
   methods: {
-    ...mapActions('user', ['store', 'update', 'destroy', 'get']),
+    ...mapActions('user', ['store', 'update', 'destroy', 'get', 'toggle']),
     submit() {
       if (this.payload.id) {
         this.update(this.payload).then(() => this.$router.push({ name: 'users' }));
@@ -67,11 +87,19 @@ export default {
         .then(() => this.$router.push({ name: 'users' }))
         .catch(alert));
     },
+    change(key) {
+      this.toggle({ id: this.payload.id, key })
+        .then(() => {
+          this.get(this.$route.params.id)
+            .then((payload) => this.$set(this, 'payload', payload))
+            .catch(() => this.$router.go(-1));
+        });
+    },
   },
   created() {
     if (this.$route.params.id) {
       this.get(this.$route.params.id)
-        .then((payload) => { this.payload = payload; })
+        .then((payload) => this.$set(this, 'payload', payload))
         .catch(() => this.$router.go(-1));
     }
   },

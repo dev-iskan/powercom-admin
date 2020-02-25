@@ -80,6 +80,17 @@ const actions = {
         .finally(() => commit('setLoading', false));
     });
   },
+  toggle({ commit }, { id, key }) {
+    return new Promise((resolve, reject) => {
+      commit('setLoading', true);
+      api.toggle(id, key)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch(reject)
+        .finally(() => commit('setLoading', false));
+    });
+  },
 };
 
 const mutations = {

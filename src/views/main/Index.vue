@@ -60,11 +60,6 @@ export default {
           to: { name: 'brands' },
           count: 0,
         },
-        {
-          icon: 'mdi-headset',
-          text: this.$t('operators'),
-          count: 0,
-        },
       ];
     },
   },

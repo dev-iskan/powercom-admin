@@ -67,10 +67,6 @@ export default {
         to: { name: 'articles' },
       },
       {
-        icon: 'mdi-headset',
-        text: 'operators',
-      },
-      {
         icon: 'mdi-contacts',
         text: 'users',
         to: { name: 'users' },

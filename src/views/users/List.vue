@@ -3,12 +3,50 @@
     v-flex(xs12)
       .border
         v-card-title.pa-2
+          v-checkbox.ma-2(
+            :disabled="loading"
+            @click.stop="setType('admin')"
+            :value="query.admin"
+            :indeterminate="query.admin == '-'"
+            :true-value="1"
+            :false-value="0"
+            indeterminate-icon="mdi-checkbox-blank-outline"
+            on-icon="mdi-checkbox-marked"
+            off-icon="mdi-minus-box"
+            :label="$t('admin')"
+            dense hide-details
+          )
+          v-checkbox.ma-2(
+            :disabled="loading"
+            @click.stop="setType('operator')"
+            :value="query.operator"
+            :indeterminate="query.operator == '-'"
+            :true-value="1"
+            :false-value="0"
+            indeterminate-icon="mdi-checkbox-blank-outline"
+            on-icon="mdi-checkbox-marked"
+            off-icon="mdi-minus-box"
+            :label="$t('operator')"
+            dense hide-details
+          )
+          v-checkbox.ma-2(
+            :disabled="loading"
+            @click.stop="setType('client')"
+            :value="query.client"
+            :indeterminate="query.client == '-'"
+            v-model="query.client"
+            :true-value="1"
+            :false-value="0"
+            indeterminate-icon="mdi-checkbox-blank-outline"
+            on-icon="mdi-checkbox-marked"
+            off-icon="mdi-minus-box"
+            :label="$t('client')"
+            dense hide-details
+          )
           v-spacer
           v-text-field.ma-0(
-            single-line
-            dense
-            hide-details
             :label="$t('search')"
+            single-line dense hide-details
             style="max-width: 300px"
           )
         v-divider
@@ -101,6 +139,9 @@ export default {
       query: {
         paginate: true,
         page: 1,
+        admin: '-',
+        operator: '-',
+        client: '-',
       },
     };
   },
@@ -109,6 +150,15 @@ export default {
   },
   methods: {
     ...mapActions('user', ['list', 'destroy']),
+    setType(type) {
+      if (this.query[type] === 1) {
+        this.query[type] = '-';
+      } else if (this.query[type] === '-') {
+        this.query[type] = 0;
+      } else {
+        this.query[type] = 1;
+      }
+    },
     remove(id) {
       this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }).catch(alert));
     },
@@ -117,7 +167,13 @@ export default {
     query: {
       deep: true,
       handler(value) {
-        this.list(value);
+        const query = {};
+        Object.keys(value).forEach((key) => {
+          if (value[key] !== '-') {
+            query[key] = value[key];
+          }
+        });
+        this.list(query);
       },
     },
   },
