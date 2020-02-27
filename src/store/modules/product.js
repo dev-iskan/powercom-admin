@@ -80,6 +80,23 @@ const actions = {
         .finally(() => commit('setLoading', false));
     });
   },
+  exportPrice({ commit }) {
+    return new Promise((resolve, reject) => {
+      commit('setLoading', true);
+      api.export()
+        .then(({ data }) => {
+          const url = window.URL.createObjectURL(new Blob([data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', 'цены.xlsx');
+          document.body.appendChild(link);
+          link.click();
+          resolve();
+        })
+        .catch(reject)
+        .finally(() => commit('setLoading', false));
+    });
+  },
 };
 
 const mutations = {

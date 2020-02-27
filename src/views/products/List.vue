@@ -1,5 +1,7 @@
 <template lang="pug">
-  v-layout(row)
+  v-layout(row wrap)
+    v-flex(xs12).text-right
+      v-btn.border(:loading="loading" text tile @click="exportPrice") {{ $t('export') }}
     v-flex(xs12)
       .border
         v-card-title.pa-2
@@ -37,7 +39,7 @@
         v-divider
         v-layout(row)
           v-spacer
-          v-btn.mr-1(text tile :to="{ name: 'products.create' }") {{ $t('add') }}
+          v-btn.mr-1.mb-1(text tile :to="{ name: 'products.create' }") {{ $t('add') }}
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
@@ -92,7 +94,7 @@ export default {
     ...mapState('product', ['loading', 'items', 'pagination']),
   },
   methods: {
-    ...mapActions('product', ['list', 'destroy']),
+    ...mapActions('product', ['list', 'destroy', 'exportPrice']),
     remove(id) {
       this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }).catch(alert));
     },

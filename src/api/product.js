@@ -6,4 +6,7 @@ export default {
   store: (payload) => axios.post('/products/', payload),
   update: (payload) => axios.post(`/products/${payload.id}?_method=PUT`, payload),
   destroy: (id) => axios.post(`/products/${id}?_method=DELETE`),
+  export: () => axios.post('/excel/export_products', null, {
+    responseType: 'blob',
+  }),
 };
