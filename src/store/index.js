@@ -7,6 +7,8 @@ import brand from './modules/brand';
 import user from './modules/user';
 import article from './modules/article';
 import product from './modules/product';
+import order from './modules/order';
+import client from './modules/client';
 
 Vue.use(Vuex);
 
@@ -19,5 +21,7 @@ export default new Vuex.Store({
     article,
     user,
     product,
+    order,
+    client,
   },
 });

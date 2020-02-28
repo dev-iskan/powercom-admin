@@ -98,6 +98,7 @@
   "users.edit": "Редактирование пользователя",
   "users.create": "Создание пользователя",
   "orders.create": "Новый заказ",
+  "orders.edit": "Редактирование заказа",
   "active": "Активный",
   "paid": "Оплачен",
   "status": "Статус",
@@ -107,6 +108,17 @@
   "admin": "Админ",
   "operator": "Оператор",
   "client": "Клиент",
+  "client.create": "Создание клиента",
   "role": "Роль",
-  "export": "Экспорт"
+  "export": "Экспорт",
+  "code": "Код",
+  "sum": "Сумма",
+  "with_delivery": "С доставкой",
+  "without_delivery": "Без доставки",
+  "order_details": "Информация о заказе",
+  "cart": "Корзина",
+  "full_name": "Ф.И.О.",
+  "currency": "сум",
+  "delivered": "Доставлено",
+  "finished_at": "Дата завершении"
 }

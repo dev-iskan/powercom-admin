@@ -45,6 +45,7 @@ export default {
       {
         icon: 'mdi-shopping',
         text: 'orders',
+        to: { name: 'orders' },
       },
       {
         icon: 'mdi-card-bulleted',

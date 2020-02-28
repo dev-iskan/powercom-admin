@@ -16,6 +16,12 @@
 <script>
 export default {
   name: 'Statistics',
+  created() {
+    const actions = ['order', 'product', 'article', 'user', 'category', 'brand'];
+    actions.forEach((action) => {
+      this.$store.dispatch(`${action}/list`, { paginate: true });
+    });
+  },
   computed: {
     cards() {
       return [
@@ -25,25 +31,26 @@ export default {
         {
           icon: 'mdi-shopping',
           text: this.$t('orders'),
-          count: 0,
+          count: this.$store.state.order.pagination.total,
+          to: { name: 'orders' },
         },
         {
           icon: 'mdi-card-bulleted',
           text: this.$t('products'),
           to: { name: 'products' },
-          count: 0,
+          count: this.$store.state.product.pagination.total,
         },
         {
           icon: 'mdi-newspaper',
           text: this.$t('news'),
           to: { name: 'articles' },
-          count: 0,
+          count: this.$store.state.article.pagination.total,
         },
         {
           icon: 'mdi-contacts',
           text: this.$t('users'),
           to: { name: 'users' },
-          count: 0,
+          count: this.$store.state.user.pagination.total,
         },
         {
           subheader: this.$t('additional'),
@@ -52,13 +59,13 @@ export default {
           icon: 'mdi-notebook',
           text: this.$t('categories'),
           to: { name: 'categories' },
-          count: 0,
+          count: this.$store.state.category.items.length,
         },
         {
           icon: 'mdi-star-box',
           text: this.$t('brands'),
           to: { name: 'brands' },
-          count: 0,
+          count: this.$store.state.brand.pagination.total,
         },
       ];
     },
