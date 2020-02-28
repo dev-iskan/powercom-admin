@@ -19,10 +19,10 @@
             td
               v-layout(row)
                 v-spacer
-                v-btn(icon color="red" @click="remove(item.id)")
+                v-btn(icon :disabled="!editable" color="red" @click="remove(item.id)")
                   v-icon(small) mdi-close
-    v-divider
-    v-layout(row)
+    v-divider(v-if="editable")
+    v-layout(row v-if="editable")
       v-flex
         v-autocomplete(
           v-model="product"
@@ -104,6 +104,10 @@ export default {
     orderId: {
       type: Number,
       required: true,
+    },
+    editable: {
+      type: Boolean,
+      default: true,
     },
   },
   computed: {

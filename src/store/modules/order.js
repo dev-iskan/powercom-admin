@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
 import api from '@/api/order';
+import i18n from '@/plugins/i18n';
 
 const state = {
   loading: false,
@@ -10,6 +11,17 @@ const state = {
     page: 0,
     length: 0,
   },
+
+  deliveryTypes: [
+    {
+      name: i18n.t('with_delivery'),
+      value: true,
+    },
+    {
+      name: i18n.t('without_delivery'),
+      value: false,
+    },
+  ],
 };
 
 const getters = {
@@ -74,6 +86,18 @@ const actions = {
       api.destroy(id)
         .then(({ data }) => {
           dispatch('list', params);
+          resolve(data);
+        })
+        .catch(reject)
+        .finally(() => commit('setLoading', false));
+    });
+  },
+  setStatus({ commit, dispatch }, { id, status }) {
+    return new Promise((resolve, reject) => {
+      commit('setLoading', true);
+      api.setStatus(id, status)
+        .then(({ data }) => {
+          dispatch('list');
           resolve(data);
         })
         .catch(reject)

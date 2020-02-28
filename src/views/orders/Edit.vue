@@ -1,6 +1,6 @@
 <template lang="pug">
   v-layout(row wrap)
-    v-flex(xs12 sm6 md4)
+    //- v-flex(xs12 sm6 md4)
       client(:value="payload.client")
     v-flex(xs12 sm6 md4)
       .border
@@ -10,10 +10,12 @@
         v-divider
         v-card-text.pa-4
           v-text-field(:label="$t('code')" :value="payload.unique_id" readonly)
-          v-text-field(
-            :label="$t('delivery')"
-            :value="$t(payload.delivery ? 'with_delivery' : 'without_delivery')"
+          v-select(
             readonly
+            v-model="payload.delivery"
+            :label="$t('delivery')"
+            :items="deliveryTypes"
+            item-text="name" item-value="value"
           )
           v-text-field(
             :value="payload.amount | numeric"
@@ -55,38 +57,56 @@
               v-if="payload.order_delivery.delivered_at"
               label
             ) {{ payload.order_delivery.delivered_at }}
-        v-btn(block tile color="blue" depressed dark large) {{ $t('finish') }}
-    v-flex(xs12 sm6 md4 v-if="payload.id")
-      cart(:orderId="payload.id" @update="refresh")
+
+        v-btn(
+          @click="set('set_in_progress')"
+          v-if="payload.amount && payload.status.id == 1"
+          block tile color="blue"
+          depressed dark large
+        ) {{ $t('to_payment') }}
+
+    v-flex(xs12 sm6 md8 v-if="payload.id")
+      cart(:orderId="payload.id" :editable="payload.status.id == 1" @update="refresh")
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
-import Client from './components/Client.vue';
+// import Client from './components/Client.vue';
 import Cart from './components/Cart.vue';
 
 export default {
   name: 'Edit',
   components: {
-    Client,
+    // Client,
     Cart,
   },
   data: () => ({
     payload: {
       id: null,
+      amount: 0,
       status: {},
       order_delivery: null,
       client: {},
     },
   }),
   computed: {
-    ...mapState('order', ['loading']),
+    ...mapState('order', ['loading', 'deliveryTypes']),
   },
   methods: {
-    ...mapActions('order', ['get']),
+    ...mapActions('order', ['get', 'setStatus']),
     refresh() {
       const { id } = this.$route.params;
       this.get(id)
         .then((payload) => { this.payload = payload; })
+        .catch(alert);
+    },
+    set(status) {
+      this.setStatus({
+        id: this.payload.id,
+        status,
+      })
+        .then(() => {
+          this.refresh();
+        })
         .catch(alert);
     },
   },

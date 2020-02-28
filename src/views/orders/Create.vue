@@ -35,30 +35,18 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'Create',
-  data() {
-    return {
-      deliveryTypes: [
-        {
-          name: this.$t('with_delivery'),
-          value: true,
-        },
-        {
-          name: this.$t('without_delivery'),
-          value: false,
-        },
-      ],
-      payload: {
-        client_id: null,
-        delivery: true,
-        full_name: '',
-        phone: '',
-        address: '-',
-        price: 0,
-      },
-    };
-  },
+  data: () => ({
+    payload: {
+      client_id: null,
+      delivery: true,
+      full_name: '',
+      phone: '',
+      address: '-',
+      price: 0,
+    },
+  }),
   computed: {
-    ...mapState('order', ['loading']),
+    ...mapState('order', ['loading', 'deliveryTypes']),
   },
   methods: {
     ...mapActions('client', ['get']),
