@@ -29,7 +29,7 @@
                 | +{{ item.client.phone }}
               td {{ item.amount }}
               td
-                v-chip(:color="item.status.color") {{ item.status.name }}
+                v-chip(:color="item.status.color" label) {{ item.status.name }}
               td {{ $t(item.delivery ? 'with_delivery' : 'without_delivery') }}
               td {{ item.created_at }}
               td {{ item.updated_at }}

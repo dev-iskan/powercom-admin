@@ -10,6 +10,8 @@ import i18n from './plugins/i18n';
 
 Vue.config.productionTip = false;
 
+Vue.filter('numeric', (value) => new Intl.NumberFormat('ru-Ru').format(value));
+
 new Vue({
   router,
   store,

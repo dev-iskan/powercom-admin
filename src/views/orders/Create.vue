@@ -52,7 +52,7 @@ export default {
         delivery: true,
         full_name: '',
         phone: '',
-        address: '',
+        address: '-',
         price: 0,
       },
     };
