@@ -72,10 +72,10 @@ export default {
         text: 'users',
         to: { name: 'users' },
       },
-      {
-        icon: 'mdi-settings',
-        text: 'settings',
-      },
+      // {
+      //   icon: 'mdi-settings',
+      //   text: 'settings',
+      // },
       {
         divider: true,
         icon: 'mdi-logout-variant',

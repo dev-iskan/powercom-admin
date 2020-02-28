@@ -1,16 +1,7 @@
 <template lang="pug">
   v-layout(row wrap)
     v-flex(xs12 sm6 md4)
-      .border
-        v-card-title.py-2 {{ $t('client') }}
-        v-divider
-        v-card-text.pa-4
-          v-text-field(:label="$t('name')" v-model="payload.client.name" readonly)
-          v-text-field(:label="$t('surname')" v-model="payload.client.surname" readonly)
-          v-text-field(:label="$t('patronymic')" v-model="payload.client.patronymic" readonly)
-          v-text-field(:label="$t('phone')" v-model="payload.client.phone" readonly)
-          v-text-field(:label="$t('email')" v-model="payload.client.email" readonly)
-
+      client(:value="payload.client")
     v-flex(xs12 sm6 md4)
       .border
         v-card-title.py-2 {{ $t('order_details') }}
@@ -71,9 +62,13 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
+import Client from './components/Client.vue';
 
 export default {
   name: 'Edit',
+  components: {
+    Client,
+  },
   data: () => ({
     payload: {
       status: {},
