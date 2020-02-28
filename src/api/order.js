@@ -7,4 +7,5 @@ export default {
   update: (payload) => axios.post(`/orders/${payload.id}?_method=PUT`, payload),
   destroy: (id) => axios.post(`/orders/${id}?_method=DELETE`),
   setStatus: (id, status) => axios.post(`/orders/orders/${id}/${status}`),
+  completeDelivery: (id) => axios.post(`/orders/orders/${id}/complete_delivery`),
 };

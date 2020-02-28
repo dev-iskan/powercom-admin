@@ -30,7 +30,16 @@
             readonly
           )
           div(v-if="payload.order_delivery")
-            .subtitle-1.mb-3 {{ $t('delivery') }}
+            v-layout(row)
+              .subtitle-1.mb-3 {{ $t('delivery') }}
+              v-spacer
+              v-chip(
+                v-if="payload.status.id > 1"
+                @click="deliver"
+                :color="payload.order_delivery.delivered ? '#32CD32' : '#FFDF00'"
+                label
+              ) {{ $t(payload.order_delivery.delivered ? 'delivered' : 'not_delivered') }}
+
             v-text-field(
               :label="$t('full_name')"
               :value="payload.order_delivery.full_name"
@@ -92,7 +101,7 @@ export default {
     ...mapState('order', ['loading', 'deliveryTypes']),
   },
   methods: {
-    ...mapActions('order', ['get', 'setStatus']),
+    ...mapActions('order', ['get', 'setStatus', 'completeDelivery']),
     refresh() {
       const { id } = this.$route.params;
       this.get(id)
@@ -108,6 +117,15 @@ export default {
           this.refresh();
         })
         .catch(alert);
+    },
+    deliver() {
+      if (!this.payload.order_delivery.delivered) {
+        this.completeDelivery(this.payload.id)
+          .then(() => {
+            this.refresh();
+          })
+          .catch(alert);
+      }
     },
   },
   created() {

@@ -120,6 +120,7 @@
   "full_name": "Ф.И.О.",
   "currency": "сум",
   "delivered": "Доставлено",
+  "not_delivered": "Не доставлено",
   "finished_at": "Дата завершении",
   "waybill": "Накладная",
   "finish": "Завершить",

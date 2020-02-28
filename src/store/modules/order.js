@@ -104,6 +104,18 @@ const actions = {
         .finally(() => commit('setLoading', false));
     });
   },
+  completeDelivery({ commit, dispatch }, id) {
+    return new Promise((resolve, reject) => {
+      commit('setLoading', true);
+      api.completeDelivery(id)
+        .then(({ data }) => {
+          dispatch('list');
+          resolve(data);
+        })
+        .catch(reject)
+        .finally(() => commit('setLoading', false));
+    });
+  },
 };
 
 const mutations = {
