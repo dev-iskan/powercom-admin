@@ -2,7 +2,14 @@
   v-layout(row)
     v-flex(xs12)
       .border
-        v-card-title.pa-2
+        v-card-title.py-2
+          v-text-field(
+            :label="$t('search')"
+            @input="search"
+            prepend-icon="mdi-magnify"
+            dense solo flat hide-details
+          )
+          v-spacer
           v-checkbox.ma-2(
             :disabled="loading"
             @click.stop="setType('admin')"
@@ -43,12 +50,6 @@
             :label="$t('client')"
             dense hide-details
           )
-          v-spacer
-          v-text-field.ma-0(
-            :label="$t('search')"
-            single-line dense hide-details
-            style="max-width: 300px"
-          )
         v-divider
         v-data-table(
           :loading="loading"
@@ -81,6 +82,7 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
+import debounce from 'lodash.debounce';
 
 export default {
   name: 'List',
@@ -137,6 +139,7 @@ export default {
         },
       ],
       query: {
+        q: '',
         paginate: true,
         page: 1,
         admin: '-',
@@ -162,6 +165,10 @@ export default {
     remove(id) {
       this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }).catch(alert));
     },
+    // eslint-disable-next-line func-names
+    search: debounce(function (q) {
+      this.query.q = q;
+    }, 500),
   },
   watch: {
     query: {
