@@ -2,14 +2,12 @@
   v-layout(row)
     v-flex(xs12)
       .border
-        v-card-title.pa-2
-          v-spacer
-          v-text-field.ma-0(
-            single-line
-            dense
-            hide-details
+        v-card-title.py-2
+          v-text-field(
+            @input="search"
+            prepend-icon="mdi-magnify"
+            dense solo flat hide-details
             :label="$t('search')"
-            style="max-width: 300px"
           )
         v-divider
         v-data-table(
@@ -42,10 +40,11 @@
         v-divider
         v-layout(row)
           v-spacer
-          v-btn.mr-1(text tile :to="{ name: 'orders.create' }") {{ $t('add') }}
+          v-btn.mr-1(text tile large :to="{ name: 'orders.create' }") {{ $t('add') }}
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
+import debounce from 'lodash.debounce';
 
 export default {
   name: 'List',
@@ -102,6 +101,7 @@ export default {
         },
       ],
       query: {
+        q: '',
         paginate: true,
         page: 1,
       },
@@ -112,6 +112,10 @@ export default {
   },
   methods: {
     ...mapActions('order', ['list', 'destroy']),
+    // eslint-disable-next-line func-names
+    search: debounce(function (query) {
+      this.query.q = query;
+    }, 500),
     remove(id) {
       this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }).catch(alert));
     },
