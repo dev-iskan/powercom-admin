@@ -17,7 +17,7 @@
 export default {
   name: 'Statistics',
   created() {
-    const actions = ['order', 'product', 'article', 'user', 'category', 'brand'];
+    const actions = ['order', 'product', 'article', 'user', 'category', 'brand', 'payment'];
     actions.forEach((action) => {
       this.$store.dispatch(`${action}/list`, { paginate: true });
     });
@@ -35,16 +35,16 @@ export default {
           to: { name: 'orders' },
         },
         {
+          icon: 'mdi-credit-card',
+          text: this.$t('payments'),
+          to: { name: 'payments' },
+          count: this.$store.state.payment.pagination.total,
+        },
+        {
           icon: 'mdi-card-bulleted',
           text: this.$t('products'),
           to: { name: 'products' },
           count: this.$store.state.product.pagination.total,
-        },
-        {
-          icon: 'mdi-newspaper',
-          text: this.$t('news'),
-          to: { name: 'articles' },
-          count: this.$store.state.article.pagination.total,
         },
         {
           icon: 'mdi-contacts',
@@ -54,6 +54,12 @@ export default {
         },
         {
           subheader: this.$t('additional'),
+        },
+        {
+          icon: 'mdi-newspaper',
+          text: this.$t('news'),
+          to: { name: 'articles' },
+          count: this.$store.state.article.pagination.total,
         },
         {
           icon: 'mdi-notebook',
