@@ -27,7 +27,10 @@
               td {{ item.client.name }} {{ item.client.surname }} {{ item.client.patronymic }}
                 br
                 | +{{ item.client.phone }}
-              td {{ item.amount }}
+              td {{ item.amount | numeric }} {{ $t('currency') }}
+              td
+                v-chip(:color="item.paid ? '#32CD32' : '#FFDF00'" label)
+                  | {{ $t(item.paid ? 'paid' : 'not_paid' ) }}
               td
                 v-chip(:color="item.status.color" label) {{ item.status.name }}
               td {{ $t(item.delivery ? 'with_delivery' : 'without_delivery') }}
@@ -64,6 +67,12 @@ export default {
         {
           text: this.$t('sum'),
           value: 'amount',
+          align: 'left',
+          sortable: true,
+        },
+        {
+          text: this.$t('paid'),
+          value: 'paid',
           align: 'left',
           sortable: true,
         },

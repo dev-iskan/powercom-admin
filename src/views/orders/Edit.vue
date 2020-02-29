@@ -74,6 +74,13 @@
           depressed dark large
         ) {{ $t('to_payment') }}
 
+        v-btn(
+          @click="set('set_completed')"
+          v-if="canFinish"
+          block tile color="blue"
+          depressed dark large
+        ) {{ $t('finish') }}
+
     v-flex(xs12 sm6 md8 v-if="payload.id")
       cart(:orderId="payload.id" :editable="payload.status.id == 1" @update="refresh")
 </template>
@@ -99,6 +106,10 @@ export default {
   }),
   computed: {
     ...mapState('order', ['loading', 'deliveryTypes']),
+    canFinish() {
+      return this.payload.paid && this.payload.status.id === 2
+        && (this.payload.delivery ? this.payload.order_delivery.delivered : true);
+    },
   },
   methods: {
     ...mapActions('order', ['get', 'setStatus', 'completeDelivery']),

@@ -48,6 +48,11 @@ export default {
         to: { name: 'orders' },
       },
       {
+        icon: 'mdi-credit-card',
+        text: 'payments',
+        to: { name: 'payments' },
+      },
+      {
         icon: 'mdi-card-bulleted',
         text: 'products',
         to: { name: 'products' },

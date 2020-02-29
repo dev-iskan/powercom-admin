@@ -7,6 +7,7 @@ import Articles from '@/views/articles/router';
 import Users from '@/views/users/router';
 import Products from '@/views/products/router';
 import Orders from '@/views/orders/router';
+import Payments from '@/views/payments/router';
 import store from '@/store';
 
 Vue.use(VueRouter);
@@ -35,6 +36,7 @@ const routes = [
       ...Users,
       ...Products,
       ...Orders,
+      ...Payments,
     ],
   },
 ];

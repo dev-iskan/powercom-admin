@@ -10,6 +10,7 @@ import product from './modules/product';
 import order from './modules/order';
 import client from './modules/client';
 import item from './modules/item';
+import payment from './modules/payment';
 
 Vue.use(Vuex);
 
@@ -25,5 +26,6 @@ export default new Vuex.Store({
     order,
     client,
     item,
+    payment,
   },
 });
