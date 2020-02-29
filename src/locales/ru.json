@@ -128,5 +128,6 @@
   "payments": "Оплаты",
   "payment_method": "Метод оплаты",
   "paid_time": "Дата оплаты",
-  "not_paid": "Не оплачен"
+  "not_paid": "Не оплачен",
+  "payments.create": "Создание оплаты"
 }

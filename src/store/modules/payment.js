@@ -4,7 +4,6 @@ import api from '@/api/payment';
 const state = {
   loading: false,
   items: [],
-  types: {},
   pagination: {
     total: 0,
     offset: 0,
@@ -36,26 +35,15 @@ const actions = {
         .finally(() => commit('setLoading', false));
     });
   },
-  store({ commit, dispatch }, payload) {
+  store({ commit }, payload) {
     return new Promise((resolve, reject) => {
       commit('setLoading', true);
       api.store(payload)
         .then(({ data }) => {
-          dispatch('list');
           resolve(data);
         })
         .catch(reject)
         .finally(() => commit('setLoading', false));
-    });
-  },
-  getTypes({ commit }) {
-    return new Promise((resolve, reject) => {
-      api.types()
-        .then(({ data }) => {
-          commit('setTypes', data);
-          resolve(data);
-        })
-        .catch(reject);
     });
   },
 };
@@ -66,9 +54,6 @@ const mutations = {
   },
   setItems(state, items) {
     state.items = items;
-  },
-  setTypes(item, types) {
-    state.types = types;
   },
   setPagination(state, {
     total, offset, page, length,

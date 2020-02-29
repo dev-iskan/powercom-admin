@@ -26,22 +26,29 @@
                   | {{ item.order.client.patronymic }}
                   br
                   | +{{ item.order.client.phone }}
-              td {{ types[item.payment_method] }}
+              td {{ paymentMethods[item.payment_method] }}
               td {{ item.amount | numeric }} {{ $t('currency') }}
               td {{ item.paid_time }}
+              td
+                v-chip(label :color="getStatus(item.order.order_status_id).color")
+                  | {{ getStatus(item.order.order_status_id).name }}
         v-divider
         .text-xs-center
           v-pagination(v-model="query.page" :length="pagination.length")
         v-divider
         v-layout(row)
           v-spacer
-          v-btn.mr-1(text large tile :to="{ name: 'payments.create' }") {{ $t('add') }}
+          item(@update="list(query)")
 </template>
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
+import Item from './components/Item.vue';
 
 export default {
   name: 'List',
+  components: {
+    Item,
+  },
   data() {
     return {
       headers: [
@@ -75,6 +82,12 @@ export default {
           align: 'left',
           sortable: true,
         },
+        {
+          text: this.$t('status'),
+          value: 'order.status',
+          align: 'left',
+          sortable: true,
+        },
       ],
       query: {
         paginate: true,
@@ -83,10 +96,12 @@ export default {
     };
   },
   computed: {
-    ...mapState('payment', ['loading', 'items', 'pagination', 'types']),
+    ...mapState('payment', ['loading', 'items', 'pagination']),
+    ...mapState('global', ['paymentMethods']),
+    ...mapGetters('global', ['getStatus']),
   },
   methods: {
-    ...mapActions('payment', ['list', 'getTypes']),
+    ...mapActions('payment', ['list']),
   },
   watch: {
     query: {
@@ -97,7 +112,6 @@ export default {
     },
   },
   created() {
-    this.getTypes();
     this.list(this.query);
   },
 };

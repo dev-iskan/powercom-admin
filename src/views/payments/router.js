@@ -5,9 +5,4 @@ export default [
     path: resource,
     component: () => import('./List'),
   },
-  {
-    name: `${resource}.create`,
-    path: `${resource}-create`,
-    component: () => import('./Item'),
-  },
 ];

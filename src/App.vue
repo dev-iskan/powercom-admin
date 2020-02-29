@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import Dialog from '@/components/Dialog.vue';
 
 export default {
@@ -16,6 +16,12 @@ export default {
   },
   computed: {
     ...mapState('global', ['loading']),
+  },
+  methods: {
+    ...mapActions('global', ['app']),
+  },
+  created() {
+    this.app();
   },
 };
 </script>
