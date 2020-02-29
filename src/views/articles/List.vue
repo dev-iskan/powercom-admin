@@ -2,14 +2,12 @@
   v-layout(row)
     v-flex(xs12)
       .border
-        v-card-title.pa-2
-          v-spacer
-          v-text-field.ma-0(
-            single-line
-            dense
-            hide-details
+        v-card-title.py-2
+          v-text-field(
             :label="$t('search')"
-            style="max-width: 300px"
+            @input="search"
+            prepend-icon="mdi-magnify"
+            dense solo flat hide-details
           )
         v-divider
         v-data-table(
@@ -42,18 +40,13 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
+import debounce from 'lodash.debounce';
 
 export default {
   name: 'List',
   data() {
     return {
       headers: [
-        // {
-        //   text: '#',
-        //   align: 'left',
-        //   sortable: false,
-        //   width: 1,
-        // },
         {
           text: this.$t('status'),
           align: 'left',
@@ -90,6 +83,7 @@ export default {
         },
       ],
       query: {
+        q: '',
         paginate: true,
         page: 1,
       },
@@ -103,6 +97,10 @@ export default {
     remove(id) {
       this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }).catch(alert));
     },
+    // eslint-disable-next-line func-names
+    search: debounce(function (q) {
+      this.query.q = q;
+    }, 500),
   },
   watch: {
     query: {
