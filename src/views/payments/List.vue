@@ -4,9 +4,10 @@
       .border
         v-card-title.py-2
           v-text-field(
+            :label="$t('search')"
+            @input="search"
             prepend-icon="mdi-magnify"
             dense solo flat hide-details
-            :label="$t('search')"
           )
         v-divider
         v-data-table(
@@ -42,6 +43,7 @@
 </template>
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex';
+import debounce from 'lodash.debounce';
 import Item from './components/Item.vue';
 
 export default {
@@ -90,6 +92,7 @@ export default {
         },
       ],
       query: {
+        q: '',
         paginate: true,
         page: 1,
       },
@@ -102,6 +105,10 @@ export default {
   },
   methods: {
     ...mapActions('payment', ['list']),
+    // eslint-disable-next-line func-names
+    search: debounce(function (q) {
+      this.query.q = q;
+    }, 500),
   },
   watch: {
     query: {
