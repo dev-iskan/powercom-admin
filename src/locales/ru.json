@@ -129,5 +129,6 @@
   "payment_method": "Метод оплаты",
   "paid_time": "Дата оплаты",
   "not_paid": "Не оплачен",
-  "payments.create": "Создание оплаты"
+  "payments.create": "Создание оплаты",
+  "import": "Импорт"
 }

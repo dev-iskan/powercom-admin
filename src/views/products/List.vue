@@ -1,18 +1,19 @@
 <template lang="pug">
   v-layout(row wrap)
-    v-flex(xs12).text-right
-      v-btn.border(:loading="loading" text tile @click="exportPrice") {{ $t('export') }}
     v-flex(xs12)
       .border
-        v-card-title.pa-2
-          v-spacer
-          v-text-field.ma-0(
-            single-line
-            dense
-            hide-details
+        v-card-title.py-2
+          v-text-field(
             :label="$t('search')"
-            style="max-width: 300px"
+            @input="search"
+            prepend-icon="mdi-magnify"
+            dense solo flat hide-details
           )
+          v-spacer
+          v-btn(:loading="loading" text tile @click="exportPrice") {{ $t('import') }}
+            v-icon.ml-2(small) mdi-database-plus
+          v-btn(:loading="loading" text tile @click="exportPrice") {{ $t('export') }}
+            v-icon.ml-2(small) mdi-file-excel-outline
         v-divider
         v-data-table(
           :loading="loading"
@@ -43,6 +44,7 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
+import debounce from 'lodash.debounce';
 
 export default {
   name: 'List',
@@ -85,6 +87,7 @@ export default {
         },
       ],
       query: {
+        q: '',
         paginate: true,
         page: 1,
       },
@@ -98,6 +101,10 @@ export default {
     remove(id) {
       this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }).catch(alert));
     },
+    // eslint-disable-next-line func-names
+    search: debounce(function (q) {
+      this.query.q = q;
+    }, 500),
   },
   watch: {
     query: {
