@@ -38,6 +38,7 @@ export default {
   name: 'Home',
   data: () => ({
     drawer: true,
+    task: null,
   }),
   computed: {
     ...mapState('auth', ['user']),
@@ -97,7 +98,10 @@ export default {
     ...mapActions('global', ['app']),
   },
   created() {
-    this.app();
+    this.task = setInterval(() => this.app(), 10000);
+  },
+  beforeDestroy() {
+    clearInterval(this.task);
   },
 };
 </script>
