@@ -6,6 +6,7 @@ const state = {
   paymentMethods: {},
   orderStatuses: {},
   orderSetting: {},
+  total: 0,
 };
 
 const getters = {
@@ -23,6 +24,7 @@ const actions = {
         commit('setPaymentMethods', data.payment_methods);
         commit('setOrderStatuses', data.order_statuses);
         commit('setOrderSettings', data.order_setting);
+        commit('setTotal', data.total);
       });
   },
 };
@@ -39,6 +41,9 @@ const mutations = {
   },
   setOrderSettings(state, payload) {
     state.orderSetting = payload;
+  },
+  setTotal(state, total) {
+    state.total = total;
   },
 };
 
