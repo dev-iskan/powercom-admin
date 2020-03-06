@@ -36,11 +36,6 @@ export default {
     loading: false,
     images: [],
   }),
-  computed: {
-    baseUrl() {
-      return process.env.VUE_APP_MEDIA_URL;
-    },
-  },
   methods: {
     list() {
       image.list(this.resource, this.id).then(({ data }) => { this.images = data; });

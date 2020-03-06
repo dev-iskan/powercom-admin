@@ -61,6 +61,11 @@
               :suffix="$t('currency')"
               readonly
             )
+            v-textarea(
+              :label="$t('note')"
+              :value="payload.note"
+              outlined
+            )
             v-chip(v-if="payload.order_delivery.delivered" label) {{ $t('delivered') }}
             v-chip.ml-2(
               v-if="payload.order_delivery.delivered_at"
@@ -102,6 +107,7 @@ export default {
       status: {},
       order_delivery: null,
       client: {},
+      note: '',
     },
   }),
   computed: {
