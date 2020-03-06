@@ -51,12 +51,18 @@
                   v-model="!!payload.client"
                   disabled hide-details
                 )
+    v-flex(xs12 v-if="payload.id")
+      orders(:clientId="payload.id")
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
+import Orders from './components/Orders.vue';
 
 export default {
   name: 'Item',
+  components: {
+    Orders,
+  },
   data: () => ({
     payload: {
       id: null,
