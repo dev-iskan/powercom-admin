@@ -33,11 +33,10 @@
               v-stepper-step(editable :step="1") {{ $t('basic_information') }}
               v-divider
               v-stepper-step(editable :step="2") {{ $t('description') }}
-              div(v-if="payload.id")
-                v-divider
-                v-stepper-step(editable :step="3") {{ $t('images') }}
-                v-divider
-                v-stepper-step(editable :step="4") {{ $t('files') }}
+              v-divider(v-if="payload.id")
+              v-stepper-step(editable :step="3" v-if="payload.id") {{ $t('images') }}
+              v-divider(v-if="payload.id")
+              v-stepper-step(editable :step="4" v-if="payload.id") {{ $t('files') }}
           v-divider
           .pa-6(v-if="step == 1")
             v-text-field(v-model="payload.name" :label="$t('firstname')")
