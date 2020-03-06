@@ -27,32 +27,44 @@
             v-icon(small) mdi-delete
             .ml-2 {{ $t('delete') }}
         v-divider
-        v-card-text
-          v-layout(row)
-            v-flex.pa-3(xs12)
-              v-text-field(v-model="payload.name" :label="$t('firstname')")
-              v-text-field(v-model="payload.price" :label="$t('price')")
-              v-text-field(v-model="payload.quantity" :label="$t('quantity')")
-              v-select(
-                v-model="payload.brand"
-                :label="$t('brand')"
-                :items="brands"
-                item-text="name"
-                item-value="name"
-              )
-              v-select(
-                v-model="payload.categories"
-                :label="$t('categories')"
-                :items="categories"
-                item-text="name"
-                item-value="name"
-                multiple
-              )
-              v-textarea(v-model="payload.short_description" :label="$t('short_description')")
-              .subtitle {{ $t('description') }}
-              editor(v-model="payload.description")
-              files(v-if="payload.id" :id="payload.id")
-              images(v-if="payload.id" resource="products" :id="payload.id")
+        v-card-text.pa-0
+          v-stepper.elevation-0(v-model="step")
+            v-stepper-header
+              v-stepper-step(editable :step="1") {{ $t('basic_information') }}
+              v-divider
+              v-stepper-step(editable :step="2") {{ $t('description') }}
+              div(v-if="payload.id")
+                v-divider
+                v-stepper-step(editable :step="3") {{ $t('images') }}
+                v-divider
+                v-stepper-step(editable :step="4") {{ $t('files') }}
+          v-divider
+          .pa-6(v-if="step == 1")
+            v-text-field(v-model="payload.name" :label="$t('firstname')")
+            v-text-field(v-model="payload.price" :label="$t('price')")
+            v-text-field(v-model="payload.quantity" :label="$t('quantity')")
+            v-select(
+              v-model="payload.brand"
+              :label="$t('brand')"
+              :items="brands"
+              item-text="name"
+              item-value="name"
+            )
+            v-select(
+              v-model="payload.categories"
+              :label="$t('categories')"
+              :items="categories"
+              item-text="name"
+              item-value="name"
+              multiple
+            )
+            v-textarea(v-model="payload.short_description" :label="$t('short_description')")
+          .pa-6(v-if="step == 2")
+            editor(v-model="payload.description")
+          .pa-6(v-if="step == 3")
+            images(v-if="payload.id" resource="products" :id="payload.id")
+          div(v-if="step == 4")
+            files(v-if="payload.id" :id="payload.id")
 </template>
 <script>
 /* eslint-disable no-param-reassign */
@@ -61,6 +73,7 @@ import { mapState, mapActions } from 'vuex';
 export default {
   name: 'Item',
   data: () => ({
+    step: 1,
     brands: [],
     categories: [],
     payload: {

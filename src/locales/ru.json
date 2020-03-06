@@ -130,5 +130,6 @@
   "paid_time": "Дата оплаты",
   "not_paid": "Не оплачен",
   "payments.create": "Создание оплаты",
-  "import": "Импорт"
+  "import": "Импорт",
+  "basic_information": "Основная информация"
 }

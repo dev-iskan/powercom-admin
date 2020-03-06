@@ -1,9 +1,8 @@
 <template lang="pug">
   v-layout(row)
     v-flex(xs12)
-      .border
-        v-card-title.pa-2.px-3.subtitle-1 {{ $t('files') }}
-        v-divider
+        //- v-card-title.pa-2.px-3.subtitle-1 {{ $t('files') }}
+        //- v-divider
         v-data-table(
           :loading="loading"
           :headers="headers"
