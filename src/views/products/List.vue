@@ -109,13 +109,29 @@ export default {
   watch: {
     query: {
       deep: true,
-      handler(value) {
-        this.list(value);
+      handler({ q, page, paginate }) {
+        this.list({ q, page, paginate });
+        this.$router.push({ name: this.$route.name, query: { ...(q ? { q } : {}), page } });
       },
     },
   },
   created() {
+    // parse route query
+    const { query } = this.$route;
+    this.query.q = query.q || '';
+    this.query.page = parseInt(query.page, 10) || 1;
+
+    // fetch
     this.list(this.query);
+
+    // update route
+    this.$router.push({
+      name: this.$route.name,
+      query: {
+        ...(this.query.q ? { q: this.query.q } : {}),
+        page: this.query.page,
+      },
+    });
   },
 };
 </script>
