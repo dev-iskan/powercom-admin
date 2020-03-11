@@ -61,16 +61,25 @@
               :suffix="$t('currency')"
               readonly
             )
-            v-textarea(
-              :label="$t('note')"
-              :value="payload.note"
-              outlined
-            )
             v-chip(v-if="payload.order_delivery.delivered" label) {{ $t('delivered') }}
             v-chip.ml-2(
               v-if="payload.order_delivery.delivered_at"
               label
             ) {{ payload.order_delivery.delivered_at }}
+          br
+
+          v-textarea(
+            :label="$t('note')"
+            v-model="payload.note"
+            outlined
+            hide-details
+          )
+          v-btn(
+            v-if="payload.status.id <= 2"
+            @click="save"
+            :loading="loading"
+            text block
+          ) {{ $t('save') }}
 
         v-btn(
           @click="set('set_in_progress')"
@@ -118,12 +127,27 @@ export default {
     },
   },
   methods: {
-    ...mapActions('order', ['get', 'setStatus', 'completeDelivery']),
+    ...mapActions('order', ['update', 'get', 'setStatus', 'completeDelivery']),
     refresh() {
       const { id } = this.$route.params;
       this.get(id)
         .then((payload) => { this.payload = payload; })
         .catch(alert);
+    },
+    save() {
+      this.update({
+        id: this.payload.id,
+        client_id: this.payload.client_id,
+        delivery: this.payload.delivery,
+        full_name: this.payload.delivery ? this.payload.order_delivery.full_name : '',
+        phone: this.payload.delivery ? this.payload.order_delivery.phone : '',
+        address: this.payload.delivery ? this.payload.order_delivery.address : '',
+        price: this.payload.delivery ? this.payload.order_delivery.price : 0,
+        note: this.payload.note,
+      })
+        .then(() => {
+          this.refresh();
+        });
     },
     set(status) {
       this.setStatus({
