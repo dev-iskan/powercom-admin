@@ -10,7 +10,8 @@
             dense solo flat hide-details
           )
           v-spacer
-          v-btn(:loading="loading" text tile @click="exportPrice") {{ $t('import') }}
+          input(ref="fileInput" type="file" name="name" accept=".xls, .xlsx" style="display: none;")
+          v-btn(:loading="loading" text tile @click="$refs.fileInput.click()") {{ $t('import') }}
             v-icon.ml-2(small) mdi-database-plus
           v-btn(:loading="loading" text tile @click="exportPrice") {{ $t('export') }}
             v-icon.ml-2(small) mdi-file-excel-outline
@@ -97,7 +98,7 @@ export default {
     ...mapState('product', ['loading', 'items', 'pagination']),
   },
   methods: {
-    ...mapActions('product', ['list', 'destroy', 'exportPrice']),
+    ...mapActions('product', ['list', 'destroy', 'exportPrice', 'importPrice']),
     remove(id) {
       this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }).catch(alert));
     },
@@ -125,13 +126,25 @@ export default {
     this.list(this.query);
 
     // update route
-    this.$router.push({
-      name: this.$route.name,
-      query: {
-        ...(this.query.q ? { q: this.query.q } : {}),
-        page: this.query.page,
-      },
-    });
+    // this.$router.push({
+    //   name: this.$route.name,
+    //   query: {
+    //     ...(this.query.q ? { q: this.query.q } : {}),
+    //     page: this.query.page,
+    //   },
+    // });
+  },
+  mounted() {
+    this.$refs.fileInput.onchange = () => {
+      const files = Array.from(this.$refs.fileInput.files);
+      files.forEach((file) => {
+        const formData = new FormData();
+        formData.append('products', file);
+        this.importPrice(formData)
+          .then(() => this.list(this.query))
+          .catch(alert);
+      });
+    };
   },
 };
 </script>

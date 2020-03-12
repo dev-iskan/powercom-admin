@@ -9,4 +9,9 @@ export default {
   export: () => axios.post('/excel/export_products', null, {
     responseType: 'blob',
   }),
+  import: (payload) => axios.post('/excel/import_products', payload, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }),
 };
