@@ -35,7 +35,7 @@
         v-divider
         v-layout(row)
           v-spacer
-          v-btn.mr-1(text tile :to="{ name: 'brands.create' }") {{ $t('add') }}
+          v-btn.mr-1(text large tile :to="{ name: 'brands.create' }") {{ $t('add') }}
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';

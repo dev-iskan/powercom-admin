@@ -20,6 +20,7 @@
             v-icon(small) mdi-content-save
             .ml-2 {{ $t('save') }}
           v-btn(
+            v-if="payload.id"
             @click="remove"
             :loading="loading"
             text color="red" large tile
