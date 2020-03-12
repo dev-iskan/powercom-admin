@@ -135,7 +135,7 @@ export default {
     // });
   },
   mounted() {
-    this.$refs.fileInput.onchange = () => {
+    this.$refs.fileInput.addEventListener('change', () => {
       const files = Array.from(this.$refs.fileInput.files);
       files.forEach((file) => {
         const formData = new FormData();
@@ -144,7 +144,8 @@ export default {
           .then(() => this.list(this.query))
           .catch(alert);
       });
-    };
+      this.$refs.fileInput.value = '';
+    }, false);
   },
 };
 </script>

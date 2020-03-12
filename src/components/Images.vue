@@ -48,7 +48,7 @@ export default {
     this.list();
   },
   mounted() {
-    this.$refs.fileInput.onchange = () => {
+    this.$refs.fileInput.addEventListener('change', () => {
       const files = Array.from(this.$refs.fileInput.files);
       files.forEach((file) => {
         const formData = new FormData();
@@ -58,7 +58,8 @@ export default {
           .then(() => this.list())
           .finally(() => { this.loading = false; });
       });
-    };
+      this.$refs.fileInput.value = '';
+    }, false);
   },
 };
 </script>

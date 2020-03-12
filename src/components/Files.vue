@@ -119,7 +119,7 @@ export default {
     },
   },
   mounted() {
-    this.$refs.fileInput.onchange = () => {
+    this.$refs.fileInput.addEventListener('change', () => {
       const files = Array.from(this.$refs.fileInput.files);
       files.forEach((item) => {
         const formData = new FormData();
@@ -129,7 +129,8 @@ export default {
           .then(() => this.list())
           .finally(() => { this.loading = false; });
       });
-    };
+      this.$refs.fileInput.value = '';
+    }, false);
   },
   created() {
     this.list();
