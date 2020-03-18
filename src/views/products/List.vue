@@ -26,6 +26,8 @@
             tr
               td {{ index + 1 }}.
               td {{ item.name }}
+              td {{ item.price | numeric }} сум
+              td {{ item.quantity | numeric }} шт.
               td {{ item.created_at }}
               td {{ item.updated_at }}
               td
@@ -68,6 +70,20 @@ export default {
         {
           text: this.$t('created_at'),
           value: 'created_at',
+          align: 'left',
+          sortable: true,
+          width: 0,
+        },
+        {
+          text: this.$t('price'),
+          value: 'price',
+          align: 'left',
+          sortable: true,
+          width: 0,
+        },
+        {
+          text: this.$t('quantity'),
+          value: 'quantity',
           align: 'left',
           sortable: true,
           width: 0,
