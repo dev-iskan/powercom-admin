@@ -139,10 +139,10 @@ export default {
         id: this.payload.id,
         client_id: this.payload.client_id,
         delivery: this.payload.delivery,
-        full_name: this.payload.delivery ? this.payload.order_delivery.full_name : '',
-        phone: this.payload.delivery ? this.payload.order_delivery.phone : '',
-        address: this.payload.delivery ? this.payload.order_delivery.address : '',
-        price: this.payload.delivery ? this.payload.order_delivery.price : 0,
+        ...(this.payload.delivery ? { full_name: this.payload.order_delivery.full_name } : {}),
+        ...(this.payload.delivery ? { phone: this.payload.order_delivery.phone } : {}),
+        ...(this.payload.delivery ? { address: this.payload.order_delivery.address } : {}),
+        ...(this.payload.delivery ? { price: this.payload.order_delivery.price || 0 } : {}),
         note: this.payload.note,
       })
         .then(() => {
