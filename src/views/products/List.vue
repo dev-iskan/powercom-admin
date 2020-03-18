@@ -68,13 +68,6 @@ export default {
           width: 0,
         },
         {
-          text: this.$t('created_at'),
-          value: 'created_at',
-          align: 'left',
-          sortable: true,
-          width: 0,
-        },
-        {
           text: this.$t('price'),
           value: 'price',
           align: 'left',
@@ -84,6 +77,13 @@ export default {
         {
           text: this.$t('quantity'),
           value: 'quantity',
+          align: 'left',
+          sortable: true,
+          width: 0,
+        },
+        {
+          text: this.$t('created_at'),
+          value: 'created_at',
           align: 'left',
           sortable: true,
           width: 0,
