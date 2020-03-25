@@ -8,4 +8,5 @@ export default {
   destroy: (id) => axios.post(`/orders/${id}?_method=DELETE`),
   setStatus: (id, status) => axios.post(`/orders/orders/${id}/${status}`),
   completeDelivery: (id) => axios.post(`/orders/orders/${id}/complete_delivery`),
+  cancelDelivery: (id) => axios.post(`/orders/orders/${id}/cancel_delivery`),
 };

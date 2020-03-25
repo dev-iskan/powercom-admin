@@ -97,6 +97,15 @@
 
     v-flex(xs12 sm6 md8 v-if="payload.id")
       cart(:orderId="payload.id" :editable="payload.status.id == 1" @update="refresh")
+
+    v-layout.px-5.pb-2(
+      v-if="payload.status.id == 1 || payload.status.id == 2"
+      row style="position: fixed; bottom: 0; right: 0;"
+    )
+      v-spacer
+      v-flex(shrink)
+        v-btn.ma-1(depressed color="red" fab dark @click="cancel")
+          v-icon mdi-close
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
@@ -127,7 +136,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions('order', ['update', 'get', 'setStatus', 'completeDelivery']),
+    ...mapActions('order', ['update', 'get', 'setStatus', 'completeDelivery', 'cancelDelivery']),
     refresh() {
       const { id } = this.$route.params;
       this.get(id)
@@ -167,6 +176,16 @@ export default {
           })
           .catch(alert);
       }
+    },
+    cancel() {
+      this.$root.$emit('confirm', () => this
+        .cancelDelivery(this.payload.id)
+        .then(() => {
+          this.get(this.payload.id)
+            .then((payload) => { this.payload = payload; })
+            .catch(alert);
+        })
+        .catch(alert));
     },
   },
   created() {
