@@ -94,7 +94,7 @@ export default {
   methods: {
     ...mapActions('brand', ['list', 'destroy']),
     remove(id) {
-      this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }).catch(alert));
+      this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }));
     },
     // eslint-disable-next-line func-names
     search: debounce(function (q) {

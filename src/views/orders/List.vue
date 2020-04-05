@@ -117,7 +117,7 @@ export default {
       this.query.q = query;
     }, 500),
     remove(id) {
-      this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }).catch(alert));
+      this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }));
     },
   },
   watch: {

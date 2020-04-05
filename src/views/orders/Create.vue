@@ -55,7 +55,7 @@ export default {
       this.store(this.payload)
         .then((order) => {
           this.$router.push({ name: 'orders.edit', params: { id: order.id } });
-        }).catch(alert);
+        });
     },
   },
   watch: {

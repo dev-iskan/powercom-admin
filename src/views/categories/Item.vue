@@ -70,7 +70,7 @@ export default {
     },
     submit() {
       const action = this.id ? this.update(this.payload) : this.store(this.payload);
-      action.then(() => this.clear()).catch(alert);
+      action.then(() => this.clear());
     },
   },
   watch: {
@@ -78,9 +78,7 @@ export default {
       if (!value) {
         this.clear();
       } else {
-        this.get(value)
-          .then((payload) => this.$set(this, 'payload', payload))
-          .catch(alert);
+        this.get(value).then((payload) => this.$set(this, 'payload', payload));
       }
     },
   },

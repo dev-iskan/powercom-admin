@@ -53,8 +53,7 @@ export default {
     remove() {
       this.$root.$emit('confirm', () => this
         .destroy({ id: this.payload.id, params: { paginate: true } })
-        .then(() => this.$router.push({ name: 'brands' }))
-        .catch(alert));
+        .then(() => this.$router.push({ name: 'brands' })));
     },
   },
   created() {

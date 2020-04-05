@@ -136,8 +136,7 @@ export default {
           this.$emit('update');
           this.product = null;
           this.quantity = 0;
-        })
-        .catch(alert);
+        });
     },
 
     remove(id) {
@@ -145,8 +144,7 @@ export default {
         .then(() => {
           this.refresh({ order_id: this.orderId });
           this.$emit('update');
-        })
-        .catch(alert);
+        });
     },
   },
   created() {

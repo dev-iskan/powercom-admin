@@ -24,12 +24,6 @@
               block outlined
               :loading="loading"
             ) {{ $t('login') }}
-
-            v-alert.mt-2(
-              :value="!!error"
-              color="error"
-              dismissible
-              outlined) {{ error }}
 </template>
 
 <script>
@@ -43,7 +37,6 @@ export default {
   data: () => ({
     loading: false,
     show: false,
-    error: '',
     auth: {
       phone,
       password,
@@ -53,10 +46,8 @@ export default {
     ...mapActions('auth', ['login']),
     submit() {
       this.loading = true;
-      this.error = '';
       this.login(this.auth)
         .then(() => this.$router.push({ name: 'home' }))
-        .catch((error) => { this.error = error; })
         .finally(() => { this.loading = false; });
     },
   },

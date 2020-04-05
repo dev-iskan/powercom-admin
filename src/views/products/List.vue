@@ -116,7 +116,7 @@ export default {
   methods: {
     ...mapActions('product', ['list', 'destroy', 'exportPrice', 'importPrice']),
     remove(id) {
-      this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }).catch(alert));
+      this.$root.$emit('confirm', () => this.destroy({ id, params: this.query }));
     },
     // eslint-disable-next-line func-names
     search: debounce(function (q) {
@@ -157,8 +157,7 @@ export default {
         const formData = new FormData();
         formData.append('products', file);
         this.importPrice(formData)
-          .then(() => this.list(this.query))
-          .catch(alert);
+          .then(() => this.list(this.query));
       });
       this.$refs.fileInput.value = '';
     }, false);

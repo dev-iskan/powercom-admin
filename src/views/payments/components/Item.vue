@@ -149,7 +149,7 @@ export default {
           this.$emit('update');
           this.dialog = false;
           this.payload.order_id = null;
-        }).catch(alert);
+        });
     },
   },
 };

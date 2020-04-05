@@ -139,9 +139,7 @@ export default {
     ...mapActions('order', ['update', 'get', 'setStatus', 'completeDelivery', 'cancelDelivery']),
     refresh() {
       const { id } = this.$route.params;
-      this.get(id)
-        .then((payload) => { this.payload = payload; })
-        .catch(alert);
+      this.get(id).then((payload) => { this.payload = payload; });
     },
     save() {
       this.update({
@@ -165,34 +163,27 @@ export default {
       })
         .then(() => {
           this.refresh();
-        })
-        .catch(alert);
+        });
     },
     deliver() {
       if (!this.payload.order_delivery.delivered) {
         this.completeDelivery(this.payload.id)
           .then(() => {
             this.refresh();
-          })
-          .catch(alert);
+          });
       }
     },
     cancel() {
       this.$root.$emit('confirm', () => this
         .cancelDelivery(this.payload.id)
         .then(() => {
-          this.get(this.payload.id)
-            .then((payload) => { this.payload = payload; })
-            .catch(alert);
-        })
-        .catch(alert));
+          this.get(this.payload.id).then((payload) => { this.payload = payload; });
+        }));
     },
   },
   created() {
     const { id } = this.$route.params;
-    this.get(id)
-      .then((payload) => { this.payload = payload; })
-      .catch(alert);
+    this.get(id).then((payload) => { this.payload = payload; });
   },
 };
 </script>
