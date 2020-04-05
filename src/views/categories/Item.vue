@@ -1,5 +1,5 @@
 <template lang="pug">
-  .border
+  v-card.elevation-0.border
     v-card-title
       .title(v-if="id") {{ $t('category.update') }}
       .title(v-else) {{ $t('category.create') }}

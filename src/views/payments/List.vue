@@ -1,7 +1,7 @@
 <template lang="pug">
   v-layout(row)
     v-flex(xs12)
-      .border
+      v-card.elevation-0.border
         v-card-title.py-2
           v-text-field(
             :label="$t('search')"

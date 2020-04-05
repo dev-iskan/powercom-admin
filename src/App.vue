@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app
+  v-app(style="background-color: #FAFAFA")
     v-progress-linear(v-if="loading" indeterminate style="z-index: 99")
     app-error-message
     router-view
@@ -56,5 +56,8 @@ export default {
 }
 .v-pagination__navigation, .v-pagination__item {
   box-shadow: none !important;
+}
+.v-data-table-header {
+  background-color: #EFEFEF;
 }
 </style>

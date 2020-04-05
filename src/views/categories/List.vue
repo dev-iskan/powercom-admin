@@ -1,7 +1,7 @@
 <template lang="pug">
     v-layout(row)
       v-flex(xs6)
-        .border
+        v-card.elevation-0.border
           v-card-title
             .title {{ $t('all_categories') }}
           v-divider

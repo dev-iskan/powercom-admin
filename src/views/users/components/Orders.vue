@@ -1,6 +1,6 @@
 <template lang="pug">
   v-card.border.elevation-0
-    v-card-title {{ $t('orders') }}
+    v-card-title.py-2 {{ $t('orders') }}
     v-divider
     v-card-text.pa-0
       v-data-table(

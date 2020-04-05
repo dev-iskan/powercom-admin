@@ -3,7 +3,7 @@
     //- v-flex(xs12 sm6 md4)
       client(:value="payload.client")
     v-flex(xs12 sm6 md4)
-      .border
+      v-card.elevation-0.border
         v-card-title.py-2 {{ $t('order_details') }}
           v-spacer
           v-chip(:color="payload.status.color" label) {{ payload.status.name }}

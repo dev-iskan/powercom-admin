@@ -28,7 +28,8 @@
       v-toolbar-title.text-capitalize {{ $t($route.name) }}
     v-content
       v-container(fluid grid-list-md)
-        router-view
+        transition(name="fade" mode="out-in")
+          router-view
 </template>
 
 <script>
@@ -105,3 +106,17 @@ export default {
   },
 };
 </script>
+<style>
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    transition: opacity 0.25s ease;
+}
+
+.fade-leave-active {
+    transition: opacity 0.25s ease;
+    opacity: 0;
+}
+</style>

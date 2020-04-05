@@ -52,8 +52,8 @@
                   v-model="!!payload.client"
                   disabled hide-details
                 )
-    v-flex(xs12 v-if="payload.id")
-      orders(:clientId="payload.id")
+    v-flex(xs12 v-if="payload.client")
+      orders(:clientId="payload.client.id")
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';

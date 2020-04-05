@@ -1,5 +1,5 @@
 <template lang="pug">
-  .border
+  v-card.elevation-0.border
     v-card-title.py-2 {{ $t('waybill') }}
     v-divider
     v-card-text.pa-0
