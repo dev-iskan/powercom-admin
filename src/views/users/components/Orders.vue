@@ -32,7 +32,7 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'Orders',
-  params: {
+  props: {
     clientId: {
       type: Number,
       required: true,

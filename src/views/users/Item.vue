@@ -52,7 +52,7 @@
                   v-model="!!payload.client"
                   disabled hide-details
                 )
-    v-flex(xs12 v-if="payload.client")
+    v-flex(xs12 v-if="payload.client.id")
       orders(:clientId="payload.client.id")
 </template>
 <script>
