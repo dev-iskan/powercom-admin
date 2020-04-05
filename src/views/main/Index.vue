@@ -4,7 +4,7 @@
       v-flex(xs12 v-if="card.subheader" :key="index")
         v-subheader.text-capitalize {{ card.subheader }}
       v-flex(xs12 v-else sm6 md3 :key="index")
-        v-list-item(v-ripple :to="card.to").border.py-3
+        v-list-item.border.radius.py-3(v-ripple :to="card.to")
           v-list-item-avatar(tile)
             v-icon(large) {{ card.icon }}
           v-list-item-content

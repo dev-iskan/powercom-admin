@@ -29,7 +29,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       api.detail()
         .then(({ data }) => {
-          commit('setUser', data.user);
+          commit('setUser', data);
           resolve(data);
         })
         .catch((error) => {

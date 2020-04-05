@@ -26,6 +26,12 @@
     v-app-bar.elevation-0.border-bottom(fixed clipped-left app)
       v-app-bar-nav-icon(@click.stop="drawer = !drawer")
       v-toolbar-title.text-capitalize {{ $t($route.name) }}
+      v-spacer
+      .mr-2.text-end
+        .subtitle-2 {{ user.name }}
+        .caption +{{ user.phone }}
+      v-avatar(color="#EFEFEF" size="36")
+        v-icon(color="#AAA") mdi-account
     v-content
       v-container(fluid grid-list-md)
         transition(name="fade" mode="out-in")

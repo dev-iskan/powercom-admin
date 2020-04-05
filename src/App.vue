@@ -46,6 +46,9 @@ export default {
 };
 </script>
 <style>
+.radius {
+  border-radius: 4px;
+}
 .border {
   background-color: white !important;
   border: 1px solid rgba(0, 0, 0, 0.12) !important
