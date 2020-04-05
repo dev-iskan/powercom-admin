@@ -16,7 +16,7 @@
           :headers="headers"
           hide-default-footer
         )
-          template(v-slot:item="{ item }")
+          template(v-slot:item="{ item, index }")
             tr
               td {{ (pagination.page - 1) * pagination.offset + index + 1 }}.
               td
