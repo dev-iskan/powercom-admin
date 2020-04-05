@@ -18,6 +18,7 @@
         )
           template(v-slot:item="{ item }")
             tr
+              td {{ (pagination.page - 1) * pagination.offset + index + 1 }}.
               td
                 router-link(:to="{ name: 'orders.edit', params: { id: item.order_id }}")
                   | {{ item.order.unique_id }}
@@ -54,6 +55,11 @@ export default {
   data() {
     return {
       headers: [
+        {
+          text: '#',
+          align: 'left',
+          sortable: false,
+        },
         {
           text: this.$t('code'),
           value: 'code',

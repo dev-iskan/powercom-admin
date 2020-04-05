@@ -20,6 +20,7 @@
             tr
               td
                 v-checkbox.mt-0.mb-1(hide-details v-model="item.active" disabled)
+              td {{ (pagination.page - 1) * pagination.offset + index + 1 }}.
               td {{ item.name }}
               td {{ item.created_at }}
               td {{ item.updated_at }}
@@ -47,6 +48,11 @@ export default {
   data() {
     return {
       headers: [
+        {
+          text: '#',
+          align: 'left',
+          sortable: false,
+        },
         {
           text: this.$t('status'),
           align: 'left',

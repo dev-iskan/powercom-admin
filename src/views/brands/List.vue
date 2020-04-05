@@ -18,7 +18,7 @@
         )
           template(v-slot:item="{ item, index }")
             tr
-              td {{ index + 1 }}.
+              td {{ (pagination.page - 1) * pagination.offset + index + 1 }}.
               td {{ item.name }}
               td {{ item.created_at }}
               td {{ item.updated_at }}

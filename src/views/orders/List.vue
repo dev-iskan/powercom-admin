@@ -21,6 +21,7 @@
               @click="$router.push({ name: 'orders.edit', params: { id: item.id } })"
               style="cursor: pointer"
             )
+              td {{ (pagination.page - 1) * pagination.offset + index + 1 }}.
               td {{ item.unique_id }}
               td {{ item.client.name }} {{ item.client.surname }} {{ item.client.patronymic }}
                 br
@@ -51,6 +52,11 @@ export default {
   data() {
     return {
       headers: [
+        {
+          text: '#',
+          align: 'left',
+          sortable: false,
+        },
         {
           text: this.$t('code'),
           value: 'code',
